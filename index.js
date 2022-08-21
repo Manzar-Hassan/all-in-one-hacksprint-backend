@@ -31,6 +31,11 @@ async function createConnection() {
 
 const client = await createConnection();
 
+//testing backend:
+app.get("/", async (request, response) => {
+  response.send({msg : "Hello world!!"})
+});
+
 // users endpoints:
 async function getHashedPassword(password) {
   const NO_OF_ROUNDS = 10;
