@@ -34,7 +34,7 @@ const client = await createConnection();
 
 //testing backend:
 app.get("/", async (request, response) => {
-  response.send({msg : "Hello world!!"})
+  response.send({ msg: "Hello world!!" });
 });
 
 // users endpoints:
@@ -46,7 +46,10 @@ async function getHashedPassword(password) {
 }
 
 async function checkUser(username) {
-  return await client.db("Hacksprint").collection("users").findOne({ username });
+  return await client
+    .db("Hacksprint")
+    .collection("users")
+    .findOne({ username });
 }
 
 app.post("/signup", async (request, response) => {
@@ -116,10 +119,10 @@ app.post("/reports", async (request, response) => {
   const result = await client
     .db("Hacksprint")
     .collection("reports")
-    .insertMany(data);
+    .insertOne(data);
 
   result.acknowledged
-    ? response.send({ msg: "Don't worry we  will take action within 24 hours!!" })
+    ? response.send({ msg: "Rest assured.. your query will be resolved within 24 hours!!" })
     : response.status(404).send({ msg: "Something went wrong !!" });
 });
 
