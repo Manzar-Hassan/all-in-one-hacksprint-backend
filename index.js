@@ -128,6 +128,35 @@ app.post("/reports", async (request, response) => {
     : response.status(404).send({ msg: "Something went wrong !!" });
 });
 
+//items endpoints:
+app.post("/item-lost", async (request, response) => {
+  const data = request.body;
+  const result = await client
+    .db("Hacksprint")
+    .collection("items")
+    .insertOne(data);
+
+  result.acknowledged
+    ? response.send({
+        msg: "Thanks for letting us know.. we will get back to you shortly!!",
+      })
+    : response.status(404).send({ msg: "Something went wrong !!" });
+});
+
+app.post("/item-found", async (request, response) => {
+  const data = request.body;
+  const result = await client
+    .db("Hacksprint")
+    .collection("items")
+    .insertOne(data);
+
+  result.acknowledged
+    ? response.send({
+        msg: "Thanks for informing us. we will definately look for a good outcome",
+      })
+    : response.status(404).send({ msg: "Something went wrong !!" });
+});
+
 //payment confirmation and contactUs e-mail query
 app.post("/order-confirm", async (request, response) => {
   const data = request.body;
