@@ -122,7 +122,9 @@ app.post("/reports", async (request, response) => {
     .insertOne(data);
 
   result.acknowledged
-    ? response.send({ msg: "Rest assured.. your query will be resolved within 24 hours!!" })
+    ? response.send({
+        msg: "Rest assured.. your query will be resolved within 24 hours!!",
+      })
     : response.status(404).send({ msg: "Something went wrong !!" });
 });
 
@@ -138,11 +140,13 @@ app.post("/order-confirm", async (request, response) => {
     },
   });
 
+  const otp = Math.floor(Math.random() * 9000 + 1000);
+
   const paymentDetails = {
     from: process.env.USER_MAIL,
     to: data.mail,
     subject: "All-in-one App Payment",
-    text: data.msg,
+    text: `Your OTP for your purchase is ${otp} and your total payable amount is ${data.amount}`,
   };
 
   mailTransporter.sendMail(paymentDetails, (error) => {
