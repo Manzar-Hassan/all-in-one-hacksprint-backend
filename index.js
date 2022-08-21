@@ -110,7 +110,7 @@ app.post("/orders", async (request, response) => {
 });
 
 //reports endpoints:
-app.post("/theatre", async (request, response) => {
+app.post("/reports", async (request, response) => {
   const data = request.body;
   const result = await client
     .db("Hacksprint")
@@ -123,7 +123,7 @@ app.post("/theatre", async (request, response) => {
 });
 
 //payment confirmation and contactUs e-mail query
-app.post("/confirm-payment", async (request, response) => {
+app.post("/order-confirm", async (request, response) => {
   const data = request.body;
 
   const mailTransporter = nodemailer.createTransport({
@@ -143,8 +143,8 @@ app.post("/confirm-payment", async (request, response) => {
 
   mailTransporter.sendMail(paymentDetails, (error) => {
     error
-      ? response.status(404).send({ msg: "payment failed!!" })
-      : response.status(200).send({ msg: "payment successful!!" });
+      ? response.status(404).send({ msg: "order failed!!" })
+      : response.status(200).send({ msg: "order successful!!" });
   });
 });
 
