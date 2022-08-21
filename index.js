@@ -9,10 +9,6 @@ import nodemailer from "nodemailer";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT;
-const MONGO_URL = process.env.MONGO_URL;
-
-app.use(express.json());
 app.use(
   cors({
     origin: "*",
@@ -20,6 +16,11 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
+
+const PORT = process.env.PORT;
+const MONGO_URL = process.env.MONGO_URL;
+
+app.use(express.json());
 
 async function createConnection() {
   const client = new MongoClient(MONGO_URL);
