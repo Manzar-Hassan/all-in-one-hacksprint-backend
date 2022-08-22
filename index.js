@@ -175,7 +175,7 @@ app.post("/order-confirm", async (request, response) => {
     from: process.env.USER_MAIL,
     to: data.mail,
     subject: "All-in-one App Payment",
-    text: `Your OTP for your purchase is ${otp} and your total payable amount is ${data.amount}`,
+    text: `Your OTP for your purchase is ${otp} and your total payable amount is Rs.${data.amount}`,
   };
 
   mailTransporter.sendMail(paymentDetails, (error) => {
